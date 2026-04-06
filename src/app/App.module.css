@@ -1,0 +1,27 @@
+@media screen and (min-width: 320px) {
+  .app_container {
+    width: 100%;
+    padding: 32px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .app_container {
+    max-width: 768px;
+    padding: 32px;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .app_container {
+    max-width: 1440px;
+    padding: 32px;
+    position: relative;
+    z-index: 1;
+  }
+}
