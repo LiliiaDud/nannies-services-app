@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   border-radius: 30px;
-  max-width: 1376px;
+  min-height: 100dvh;
   padding: 0;
   margin: 0 auto;
   height: 100%;
@@ -10,7 +10,6 @@
 }
 
 .left_container {
-  width: 100%;
   background: #f03f3b;
   padding: 120px 20px 80px 20px;
 }
@@ -30,7 +29,7 @@
 .title {
   font-weight: 500;
   font-size: 40px;
-  line-height: 70px;
+  line-height: 1.1;
   letter-spacing: -0.03em;
   color: #fbfbfb;
   margin-bottom: 18px;
@@ -46,44 +45,47 @@
 }
 
 .button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  flex-direction: row;
+  white-space: nowrap;
+  max-width: 230px;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 20px;
+  line-height: 1.2;
   text-decoration: none;
   letter-spacing: -0.01em;
   color: #fbfbfb;
   border: 1px solid rgba(251, 251, 251, 0.4);
   background-color: transparent;
   border-radius: 30px;
-  padding: 16px 34px;
-  gap: 10px;
+  padding: 18px 50px;
+  gap: 18px;
 }
 
 .btn_icon{
   width: 14px;
   height: 16px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
 }
 
 .button:hover .btn_icon {
   transform: rotate(-53deg);
-  transition: transform 0.3s ease;
 }
 
 .right_container {
   position: relative;
   background-size: cover;
-  background-image: url(/images/Hero-1.jpg);
+  background-image: url(/public/images/Hero-1.jpg);
   background-repeat: no-repeat;
   background-position: center;
   padding: 200px 20px 20px 20px;
 }
 @media screen and (min-resolution: 2dppx) {
   .right_container {
-    background-image: url(/images/Hero-1@2x.jpg);
+    background-image: url(/public/images/Hero-1@2x.jpg);
   }
 }
 
@@ -132,8 +134,21 @@
   margin-bottom: 0;
 }
 
-
 @media screen and (min-width: 768px) and (max-width: 1439px) {
+  .section_hero {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .left_container {
+    padding: 201px 64px 163px 56px;
+  }
+
+  .right_container {
+    position: relative;
+    padding: 518px 50px 50px 325px;
+  }
+
   .check_block {
     position: absolute;
     right: 50px;
@@ -145,6 +160,7 @@
 
 @media screen and (min-width: 1440px) {
   .section_hero {
+    flex-direction: row;
     padding: 0;
     border-radius: 30px;
     min-height: 0;
@@ -168,12 +184,6 @@
 
   .text {
     font-size: 28px;
-  }
-
-  .button {
-    font-size: 20px;
-    padding: 18px 50px;
-    gap: 18px;
   }
 
   .right_container {
