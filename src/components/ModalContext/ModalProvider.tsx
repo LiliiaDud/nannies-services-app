@@ -1,7 +1,8 @@
 import { useState } from "react";
+import type { ReactNode } from "react";
 import { ModalContext } from "./ModalContext";
 
-export function ModalProvider({ children }: { children: React.ReactNode }) {
+export function ModalProvider({ children }: { children: ReactNode }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
