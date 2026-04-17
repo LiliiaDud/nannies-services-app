@@ -1,0 +1,37 @@
+.header {
+  width: 100%;
+  border-bottom: 1px solid #eee;
+}
+
+.container {
+  max-width: 1376px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+}
+
+.link {
+  font-size: 16px;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #f03f3b;
+}
+
+.active {
+  color: #f03f3b;
+  font-weight: 600;
+}

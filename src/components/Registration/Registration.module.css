@@ -1,0 +1,101 @@
+.registration {
+  position: relative;
+  width: 100%;
+  max-width: 565px;
+  padding: clamp(24px, 5vw, 64px);
+  background: #fbfbfb;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin: 0 auto;
+}
+
+.btn_close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.close_icon {
+  stroke-width: 2.5px;
+  stroke: #11101c;
+  width: 32px;
+  height: 32px;
+}
+
+.registration_info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.registration_title {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: #11101c;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.registration_text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  color: rgba(17, 16, 28, 0.5);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.color_text {
+  color: #f03f3b;
+}
+
+.input {
+  border: 1px solid rgba(17, 16, 28, 0.1);
+  border-radius: 12px;
+  padding: 0 16px;
+  width: 100%;
+  height: 52px;
+}
+
+.input::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  color: #11101c;
+}
+
+.btn_signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 52px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  background: #f03f3b;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn_signup:hover {
+  color: #f03f3b;
+  background: #fbfbfb;
+}
