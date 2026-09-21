@@ -1,8 +1,10 @@
-import css from "./Login.module.css";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-import { useModal } from "../ModalContext/UseModal";
+import { useState } from 'react';
+import css from './Login.module.css';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import { useModal } from '../ModalContext/UseModal';
+import { loginUser } from '../../services/auth';
 
 interface LoginFormData {
   email: string;
@@ -10,17 +12,16 @@ interface LoginFormData {
 }
 
 const Schema = Yup.object().shape({
-  email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required!"),
+  email: Yup.string().email('Invalid email format').required('Email is required!'),
   password: Yup.string()
-    .min(8, "Minimum 8 characters")
-    .max(128, "Maximum 128 characters")
-    .required("Password required!"),
+    .min(8, 'Minimum 8 characters')
+    .max(128, 'Maximum 128 characters')
+    .required('Password required!'),
 });
 
 export default function Login() {
   const { closeModal } = useModal();
+  const [showPassword, setShowPassword] = useState(false); // Стан для видимості пароля
 
   const {
     register,
@@ -30,18 +31,22 @@ export default function Login() {
     resolver: yupResolver(Schema),
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log(data);
-    closeModal();
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      await loginUser(data.email, data.password);
+      closeModal();
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error('Login error:', error.message);
+      } else {
+        console.error('Login error:', error);
+      }
+    }
   };
 
   return (
     <div className={css.login}>
-      <button
-        className={css.btn_close}
-        aria-label="Close modal"
-        onClick={closeModal}
-      >
+      <button className={css.btn_close} aria-label="Close modal" onClick={closeModal}>
         <svg width={19} height={19} className={css.close_icon}>
           <use href="/sprite.svg#icon-close"></use>
         </svg>
@@ -49,24 +54,33 @@ export default function Login() {
       <div className={css.login_info}>
         <h2 className={css.login_title}>Log In</h2>
         <p className={css.login_text}>
-          Welcome back! Please enter your credentials to access your account and
-          continue your babysitter search.
+          Welcome back! Please enter your credentials to access your account and continue your
+          babysitter search.
         </p>
       </div>
       <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-        <input
-          {...register("email")}
-          className={css.input}
-          type="email"
-          placeholder="Email"
-        />
+        <input {...register('email')} className={css.input} type="email" placeholder="Email" />
         <p className={css.color_text}>{errors.email?.message}</p>
-        <input
-          {...register("password")}
-          className={css.input}
-          type="password"
-          placeholder="Password"
-        />
+
+        <div className={css.box_password}>
+          <input
+            {...register('password')}
+            className={css.input}
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Password"
+          />
+          <button
+            type="button"
+            className={css.btn_eyes}
+            onClick={() => setShowPassword(prev => !prev)}
+            aria-label="Toggle password visibility"
+          >
+            <svg width={20} height={20} className={css.icon_eye}>
+              <use href={`/sprite.svg#${showPassword ? 'icon-eye' : 'icon-eye-off'}`}></use>
+            </svg>
+          </button>
+        </div>
+
         <p className={css.color_text}>{errors.password?.message}</p>
         <button className={css.btn_login} type="submit">
           Log In
