@@ -1,37 +1,297 @@
-.header {
+.header_container {
+  z-index: 2;
+  position: absolute;
+  background-color: transparent;
+  box-sizing: border-box;
   width: 100%;
-  border-bottom: 1px solid #eee;
+  left: 0;
 }
 
-.container {
-  max-width: 1376px;
-  margin: 0 auto;
-  padding: 20px;
+.header_container_inner {
+  z-index: 2;
+  position: absolute;
+  /*background-color: transparent;*/
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #f03f3b;
+  left: 0;
+}
+
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  padding: 20px 40px;
+  border-bottom: 1px solid rgba(251, 251, 251, 0.4);
+  max-width: 1376px;
+  margin: 0 auto;
 }
-
-.logo {
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.nav {
+.headerInNannies {
   display: flex;
-  gap: 24px;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 20px 40px;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
-.link {
+.inner_logo {
+  flex: 0 0 auto;
+  display: flex;
+}
+
+.logo_text {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 117%;
+  letter-spacing: -0.02em;
+  color: #fbfbfb;
+  text-decoration: none;
+  transition:
+    0.2s ease,
+    text-shadow 0.2s ease;
+}
+
+.nav_text:hover,
+.logo_text:hover {
+  color: #ffffff;
+  text-shadow:
+    0 0 8px #ffffff,
+    0 0 16px #ffffff;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu_home {
+  justify-content: flex-start;
+  margin-left: auto;
+  margin-right: 92px;
+}
+
+.navigation {
+  display: flex;
+  gap: 40px;
+  margin: 0;
+}
+
+.menu {
+  display: none;
+}
+
+.nav_text {
+  font-weight: 400;
   font-size: 16px;
-  transition: color 0.2s ease;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  text-decoration: none;
+  transition:
+    0.2s ease,
+    text-shadow 0.2s ease;
 }
 
-.link:hover {
+.nav_item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.icon_point {
+  fill: #fbfbfb;
+}
+
+.registration {
+  display: flex;
+  gap: 8px;
+}
+
+.registration_form {
+  display: none;
+}
+
+.inner_registration_form {
+  display: none;
+}
+
+.user_info {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.user_btn {
+  cursor: pointer;
+  padding: 8px;
+  background-color: #fbfbfb;
+  border: none;
+  border-radius: 10px;
+}
+
+.icon_user {
   color: #f03f3b;
 }
 
-.active {
+.user_text {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 111%;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+}
+
+.btn_log {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  border: 1px solid rgba(251, 251, 251, 0.4);
+  border-radius: 30px;
+  padding: 14px 39px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn_registration {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  border-radius: 30px;
+  padding: 14px 40px;
+  background: #f03f3b;
+  cursor: pointer;
+  border: none;
+}
+
+.btn_inNannies {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  border: 1px solid rgba(251, 251, 251, 0.4);
+  border-radius: 30px;
+  padding: 14px 39px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn_logOut {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  border-radius: 30px;
+  padding: 14px 40px;
+  background: #f03f3b;
+  cursor: pointer;
+  border: none;
+}
+
+.btn_registration:hover,
+.btn_logOut:hover {
   color: #f03f3b;
-  font-weight: 600;
+  background: #fbfbfb;
+}
+
+.btn_inNannies:hover,
+.btn_log:hover {
+  color: #f03f3b;
+  background: #fbfbfb;
+  border: 1px solid rgba(240, 63, 59, 1);
+}
+
+.burger_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 15px;
+  right: 15%;
+  transform: translateX(20%);
+  border: none;
+  background-color: transparent;
+  margin-left: auto;
+}
+
+.burger_icon {
+  display: block;
+  stroke: #fbfbfb;
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fbfbfb;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .header {
+    padding: 20px 76px;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .burger_btn {
+    position: absolute;
+    top: 15px;
+    right: 10%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .header {
+    padding: 20px 96px;
+  }
+
+  .logo {
+    padding-left: 0;
+  }
+
+  .menu {
+    display: flex;
+  }
+
+  .logo_text {
+    font-size: 24px;
+  }
+
+  .registration_form {
+    display: flex;
+  }
+
+  .burger_btn {
+    display: none;
+  }
+
+  .header {
+    padding: 20px 96px;
+  }
+
+  .headerInNannies {
+    max-width: 1440px;
+    padding: 20px 128px;
+  }
+
+  .inner_registration_form {
+    flex: 0 0 auto;
+    display: flex;
+  }
 }

@@ -77,6 +77,27 @@
   color: #11101c;
 }
 
+.box_password {
+  position: relative;
+}
+
+.btn_eyes {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  display: block;
+}
+
+.icon_eye,
+.icon_eye_off {
+  color: #11101c;
+  stroke: currentColor;
+  fill: none;
+}
+
 .btn_signup {
   display: flex;
   align-items: center;

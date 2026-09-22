@@ -6,6 +6,11 @@ import * as Yup from 'yup';
 import { useModal } from '../ModalContext/UseModal';
 import { loginUser } from '../../services/auth';
 
+//  Додаю інтерфейс пропсів для Login
+interface LoginProps {
+  setIsAuth: (value: boolean) => void;
+  setUserName: React.Dispatch<React.SetStateAction<string>>;
+}
 interface LoginFormData {
   email: string;
   password: string;
@@ -19,9 +24,10 @@ const Schema = Yup.object().shape({
     .required('Password required!'),
 });
 
-export default function Login() {
+//  Прийм ці пропси в компоненті
+export default function Login({ setIsAuth, setUserName }: LoginProps) {
   const { closeModal } = useModal();
-  const [showPassword, setShowPassword] = useState(false); // Стан для видимості пароля
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -33,7 +39,16 @@ export default function Login() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      await loginUser(data.email, data.password);
+      //  Авториз через Firebase і отримуємо користувача
+      const user = await loginUser(data.email, data.password);
+
+      //  Оновл стани і localStorage для App / Header
+      setIsAuth(true);
+      const name = user.displayName || 'User';
+      setUserName(name);
+      localStorage.setItem('userName', name);
+      localStorage.setItem('token', 'true');
+
       closeModal();
     } catch (error: unknown) {
       if (error instanceof Error) {
