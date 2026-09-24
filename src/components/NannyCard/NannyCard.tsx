@@ -31,7 +31,7 @@ export default function NannyCard({ nanny, favorites, toggleFavorite, isAuth }: 
     return age;
   }
 
-  const isFavorite = favorites.includes(nanny.name) && false;
+  const isFavorite = favorites.includes(nanny.name) && true;
 
   return (
     <div className={css.card}>
@@ -50,12 +50,12 @@ export default function NannyCard({ nanny, favorites, toggleFavorite, isAuth }: 
         }}
       >
         {isFavorite ? (
-          <svg className={css.heart_icon} width={26} height={26}>
-            <use href="/sprite.svg#icon-heart"></use>
-          </svg>
-        ) : (
           <svg className={css.favorite_icon} width={26} height={26}>
             <use href="/sprite.svg#icon-heart_favorite"></use>
+          </svg>
+        ) : (
+          <svg className={css.heart_icon} width={26} height={26}>
+            <use href="/sprite.svg#icon-heart"></use>
           </svg>
         )}
       </button>

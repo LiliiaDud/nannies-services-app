@@ -19,16 +19,14 @@
   padding: 0;
 }
 
-.favorite_icon {
-  width: 25px;
-  height: 22px;
+.heart_icon {
   stroke: #11101c;
   stroke-width: 2;
   fill: transparent;
   transition: all 0.2s ease;
 }
 
-.heart_icon {
+.favorite_icon {
   fill: #f03f3b;
   stroke: #f03f3b;
 }
