@@ -1,0 +1,159 @@
+.appointment {
+  position: relative;
+  max-width: 599px;
+  background: #fbfbfb;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  border-radius: 30px;
+  padding: 64px;
+}
+
+.btn_close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.close_icon {
+  stroke-width: 2.5px;
+  stroke: #11101c;
+  width: 32px;
+  height: 32px;
+}
+
+.appointment_info {
+  border-radius: 15px;
+  border: none;
+  margin-bottom: 40px;
+}
+
+.appointment_title {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: #11101c;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+.appointment_text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  color: rgba(17, 16, 28, 0.5);
+  margin: 0;
+}
+
+.nanny_info {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.avatar {
+  border-radius: 15px;
+}
+
+.nanny_name_text {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 133%;
+  color: #8a8a89;
+  margin: 0;
+}
+
+.nanny_name_name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #11101c;
+  margin: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form_row {
+  display: flex;
+  gap: 8px;
+}
+
+.input_row {
+  flex: 1;
+  border: 1px solid rgba(17, 16, 28, 0.1);
+  border-radius: 12px;
+  padding: 0 16px;
+  height: 52px;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.color_text {
+  color: #f03f3b;
+}
+
+.input {
+  border: 1px solid rgba(17, 16, 28, 0.1);
+  border-radius: 12px;
+  padding: 0 16px;
+  width: 100%;
+  height: 52px;
+  box-sizing: border-box;
+}
+
+.input::placeholder,
+.input_row::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  color: #11101c;
+}
+
+.textarea {
+  resize: none;
+  border: 1px solid rgba(17, 16, 28, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+  height: 116px;
+}
+
+.textarea::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  color: #11101c;
+}
+
+.form_btn {
+  background: #f03f3b;
+  border-radius: 30px;
+  height: 52px;
+  border: none;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_btn:hover {
+  color: #f03f3b;
+  background: #fbfbfb;
+  border: 1px solid rgba(240, 63, 59, 1);
+}
