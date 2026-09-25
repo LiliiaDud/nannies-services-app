@@ -300,6 +300,7 @@
   width: 215px;
   height: 48px;
   background: #f03f3b;
+  white-space: nowrap;
   cursor: pointer;
   border: none;
 }
