@@ -12,7 +12,8 @@ interface NanniesPageProps {
 }
 
 export default function Nannies({ favorites, toggleFavorite, isAuth }: NanniesPageProps) {
-  const [nannies, setNannies] = useState<Nanny[]>([]);
+  const [allNannies, setAllNannies] = useState<Nanny[]>([]);
+  const [visibleCount, setVisibleCount] = useState<number>(3);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [filterKey, setFilterKey] = useState<FilterKey>('Show all');
@@ -22,8 +23,10 @@ export default function Nannies({ favorites, toggleFavorite, isAuth }: NanniesPa
       try {
         setLoading(true);
         setError(null);
+
         const data = await getNannies(filterKey);
-        setNannies(data);
+        setAllNannies(data);
+        setVisibleCount(3);
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(err.message);
@@ -37,6 +40,12 @@ export default function Nannies({ favorites, toggleFavorite, isAuth }: NanniesPa
 
     loadData();
   }, [filterKey]);
+
+  const currentNannies = allNannies.slice(0, visibleCount);
+
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + 3);
+  };
 
   return (
     <div className={css.container}>
@@ -60,12 +69,22 @@ export default function Nannies({ favorites, toggleFavorite, isAuth }: NanniesPa
         {error && <p className={css.error}>Error: {error}</p>}
 
         {!loading && !error && (
-          <NanniesList
-            nannies={nannies}
-            favorites={favorites}
-            toggleFavorite={toggleFavorite}
-            isAuth={isAuth}
-          />
+          <>
+            <NanniesList
+              nannies={currentNannies}
+              favorites={favorites}
+              toggleFavorite={toggleFavorite}
+              isAuth={isAuth}
+            />
+
+            {visibleCount < allNannies.length && (
+              <div className={css.btn_box}>
+                <button type="button" className={css.load_more_btn} onClick={handleLoadMore}>
+                  Load more
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
