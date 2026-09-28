@@ -4,7 +4,7 @@ import css from './App.module.css';
 import { useModal } from '../components/ModalContext/UseModal';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { logout } from '../services/users';
+import { logoutUser } from '../services/auth';
 import Header from '../components/Header/Header';
 import Home from '../pages/Home/Home.tsx';
 import Nannies from '../pages/Nannies/Nannies';
@@ -34,11 +34,14 @@ function App() {
     });
   };
 
-  const handleLogOut = () => {
-    logout();
-    localStorage.removeItem('favorites');
-    setIsAuth(false);
-    setUserName('');
+  const handleLogOut = async () => {
+    try {
+      await logoutUser();
+      setIsAuth(false);
+      setUserName('');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   return (
