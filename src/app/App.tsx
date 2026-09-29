@@ -1,5 +1,4 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-
 import css from './App.module.css';
 import { useModal } from '../components/ModalContext/UseModal';
 import { useState } from 'react';
@@ -9,7 +8,6 @@ import Header from '../components/Header/Header';
 import Home from '../pages/Home/Home.tsx';
 import Nannies from '../pages/Nannies/Nannies';
 import Favorites from '../pages/Favorites/Favorites';
-
 import Modal from '../components/Modal/Modal';
 
 function App() {
@@ -21,6 +19,7 @@ function App() {
   const [userName, setUserName] = useState<string>(localStorage.getItem('userName') || '');
 
   const location = useLocation();
+  const isHome = location.pathname === '/';
 
   const { isModalOpen, modalContent, closeModal } = useModal();
 
@@ -37,6 +36,7 @@ function App() {
   const handleLogOut = async () => {
     try {
       await logoutUser();
+      localStorage.removeItem('favorites');
       setIsAuth(false);
       setUserName('');
     } catch (error) {
@@ -45,33 +45,56 @@ function App() {
   };
 
   return (
-    <div className={`${css.app_container} ${location.pathname === '/' ? css.home : ''}`}>
+    <div className={css.app_wrapper}>
       {isModalOpen && modalContent && <Modal onClose={closeModal}>{modalContent}</Modal>}
-      <Header
-        isAuth={isAuth}
-        userName={userName}
-        onLogOut={handleLogOut}
-        setIsAuth={setIsAuth}
-        setUserName={setUserName}
-      />
-
       <ToastContainer position="top-right" autoClose={3000} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/nannies"
-          element={
-            <Nannies favorites={favorites} toggleFavorite={toggleFavorite} isAuth={isAuth} />
-          }
-        />
-        <Route
-          path="/favorites"
-          element={
-            <Favorites favorites={favorites} toggleFavorite={toggleFavorite} isAuth={isAuth} />
-          }
-        />
-      </Routes>
+      {isHome ? (
+        <div className={`${css.app_container} ${css.home}`}>
+          <Header
+            isAuth={isAuth}
+            userName={userName}
+            onLogOut={handleLogOut}
+            setIsAuth={setIsAuth}
+            setUserName={setUserName}
+          />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </main>
+        </div>
+      ) : (
+        <>
+          <Header
+            isAuth={isAuth}
+            userName={userName}
+            onLogOut={handleLogOut}
+            setIsAuth={setIsAuth}
+            setUserName={setUserName}
+          />
+          <main className={css.app_container}>
+            <Routes>
+              <Route
+                path="/nannies"
+                element={
+                  <Nannies favorites={favorites} toggleFavorite={toggleFavorite} isAuth={isAuth} />
+                }
+              />
+              <Route
+                path="/favorites"
+                element={
+                  <Favorites
+                    favorites={favorites}
+                    toggleFavorite={toggleFavorite}
+                    isAuth={isAuth}
+                  />
+                }
+              />
+            </Routes>
+          </main>
+        </>
+      )}
     </div>
   );
 }

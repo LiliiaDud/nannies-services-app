@@ -1,27 +1,37 @@
+.app_wrapper {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
 @media screen and (min-width: 320px) {
   .app_container {
     width: 100%;
-    padding: 32px;
+    padding: 20px 16px;
     margin: 0 auto;
-    position: relative;
-    z-index: 1;
+    box-sizing: border-box;
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) and (max-width: 1439px) {
   .app_container {
     max-width: 768px;
     padding: 32px;
-    position: relative;
-    z-index: 1;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .app_container {
     max-width: 1440px;
-    padding: 32px;
-    position: relative;
-    z-index: 1;
+    padding: 32px 96px;
   }
+}
+
+.home {
+  max-width: 1440px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-radius: 30px;
+  padding: 24px;
+  overflow: hidden;
 }
