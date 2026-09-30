@@ -17,7 +17,7 @@ securely manage their accounts through an integrated authentication system.
   <img src="./public/images/read.webp" alt="Nanny Services Preview" width="700"/>
 </p>
 <p align="center">
-  <a href="">🌐 Live Demo</a> •
+  <a href="https://nannies-services-app-ob3i.vercel.app">🌐 Live Demo</a> •
   <a href="https://github.com/LiliiaDud/nannies-services-app">📁 GitHub Repository</a>
 </p>
 
