@@ -5,8 +5,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useModal } from '../ModalContext/UseModal';
 import { loginUser } from '../../services/auth';
+import { toast } from 'react-toastify';
 
-//  Додаю інтерфейс пропсів для Login
 interface LoginProps {
   setIsAuth: (value: boolean) => void;
   setUserName: React.Dispatch<React.SetStateAction<string>>;
@@ -24,7 +24,6 @@ const Schema = Yup.object().shape({
     .required('Password required!'),
 });
 
-//  Прийм ці пропси в компоненті
 export default function Login({ setIsAuth, setUserName }: LoginProps) {
   const { closeModal } = useModal();
   const [showPassword, setShowPassword] = useState(false);
@@ -39,22 +38,30 @@ export default function Login({ setIsAuth, setUserName }: LoginProps) {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      //  Авториз через Firebase і отримуємо користувача
       const user = await loginUser(data.email, data.password);
 
-      //  Оновл стани і localStorage для App / Header
       setIsAuth(true);
       const name = user.displayName || 'User';
       setUserName(name);
       localStorage.setItem('userName', name);
       localStorage.setItem('token', 'true');
-
+      // toast.success('Successfully logged in!');успішне сповіщення
       closeModal();
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error('Login error:', error.message);
+        if (
+          error.message.includes('invalid-credential') ||
+          error.message.includes('wrong-password') ||
+          error.message.includes('user-not-found')
+        ) {
+          toast.error('Invalid email or password. Please try again.');
+        } else {
+          toast.error(`Login failed: ${error.message}`);
+        }
       } else {
         console.error('Login error:', error);
+        toast.error('An unexpected error occurred during login.');
       }
     }
   };

@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useModal } from '../ModalContext/UseModal';
 import { registerUser } from '../../services/auth';
+import { toast } from 'react-toastify';
 
-// 1. Додаю інтерфейс пропсів для Registration
 interface RegistrationProps {
   setIsAuth: (value: boolean) => void;
   setUserName: React.Dispatch<React.SetStateAction<string>>;
@@ -26,7 +26,6 @@ const Schema = Yup.object().shape({
     .required('Password required!'),
 });
 
-// 2. Приймаю пропси в компоненті
 export default function Registration({ setIsAuth, setUserName }: RegistrationProps) {
   const { closeModal } = useModal();
   const [showPassword, setShowPassword] = useState(false);
@@ -41,10 +40,8 @@ export default function Registration({ setIsAuth, setUserName }: RegistrationPro
 
   const onSubmit = async (data: RegistrationFormData) => {
     try {
-      // Реєстр і отримуємо користувача
       const user = await registerUser(data.name, data.email, data.password);
 
-      // Онов стани і localStorage
       setIsAuth(true);
       const name = user.displayName || data.name;
       setUserName(name);
@@ -55,8 +52,15 @@ export default function Registration({ setIsAuth, setUserName }: RegistrationPro
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error('Registration error:', error.message);
+
+        if (error.message.includes('email-already-in-use')) {
+          toast.error('This email is already registered. Please log in instead.');
+        } else {
+          toast.error(`Registration failed: ${error.message}`);
+        }
       } else {
         console.error('Registration error:', error);
+        toast.error('An unexpected error occurred during registration.');
       }
     }
   };
@@ -80,12 +84,7 @@ export default function Registration({ setIsAuth, setUserName }: RegistrationPro
         <p className={css.color_text}>{errors.name?.message}</p>
         <input {...register('email')} className={css.input} type="email" placeholder="Email" />
         <p className={css.color_text}>{errors.email?.message}</p>
-        {/* <input
-          {...register('password')}
-          className={css.input}
-          type="password"
-          placeholder="Password"
-        /> */}
+
         <div className={css.box_password}>
           <input
             {...register('password')}
