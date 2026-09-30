@@ -1,4 +1,4 @@
-import css from './mobileMenu.module.css';
+import css from './MobileMenu.module.css';
 import { Link } from 'react-router-dom';
 
 interface MobileMenuProps {
