@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import css from './App.module.css';
 import { useModal } from '../components/ModalContext/UseModal';
 import { useState } from 'react';
@@ -19,6 +19,7 @@ function App() {
   const [userName, setUserName] = useState<string>(localStorage.getItem('userName') || '');
 
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === '/';
 
   const { isModalOpen, modalContent, closeModal } = useModal();
@@ -39,6 +40,7 @@ function App() {
       localStorage.removeItem('favorites');
       setIsAuth(false);
       setUserName('');
+      navigate('/');
     } catch (error) {
       console.error('Logout error:', error);
     }
